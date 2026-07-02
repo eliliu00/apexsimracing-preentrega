@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroCanvas();
   initHeroAnimations();
   initTelemetry();
+  initHorizontalScroll();
   initCounters();
   initMagnetic();
   initScrollReveal();
@@ -815,3 +816,33 @@ hwBrands.forEach(brand => {
   
 });
 
+
+/* ═══════════════════════════════════════════════════════
+   HORIZONTAL SCROLL FILMSTRIP — Lando-style
+   A strip of images that scrolls horizontally as the
+   user scrolls vertically through a pinned section.
+   Triggered by .filmstrip-section wrapper.
+═══════════════════════════════════════════════════════ */
+function initHorizontalScroll() {
+  const section = $('.filmstrip-section');
+  const track   = $('.filmstrip-track');
+  if (!section || !track) return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
+  // How much extra scroll distance to map (controls speed)
+  const SPEED = 0.9;
+
+  function update() {
+    const rect      = section.getBoundingClientRect();
+    const sectionH  = section.offsetHeight;
+    const trackW    = track.scrollWidth - track.offsetWidth;
+
+    // How far we are into the section [0..1]
+    const progress = clamp((-rect.top) / (sectionH - window.innerHeight), 0, 1);
+    track.style.transform = `translateX(${-progress * trackW * SPEED}px)`;
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+}

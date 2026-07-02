@@ -416,26 +416,27 @@
     .precio-cta .btn-primary { justify-content: center; }
     .precio-cta .btn-ghost { justify-content: center; }
 
-    /* ═══ PARA QUIÉN ═══ */
-    .paraquien-section { background: rgba(8,8,8,0.80); border-bottom: 1px solid var(--border); }
-    .paraquien-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-      background: var(--border); border: 1px solid var(--border);
-      margin-top: 60px;
-    }
-    .pq-card {
-      background: var(--bg2); padding: 40px 32px;
-    }
-    .pq-num {
-      font-family: var(--mono); font-size: 40px; font-weight: 700;
-      color: transparent; -webkit-text-stroke: 1px rgba(0,229,255,0.2);
-      display: block; margin-bottom: 16px; letter-spacing: -0.04em;
-    }
-    .pq-title {
-      font-size: 17px; font-weight: 700; text-transform: uppercase;
-      color: var(--white); margin-bottom: 10px; letter-spacing: -0.01em;
-    }
-    .pq-desc { font-size: 13px; line-height: 1.65; color: var(--muted); }
+   /* ═══════════════════════════════════════
+    PARA QUIÉN — flip cards
+    ═══════════════════════════════════════ */
+   .paraquien-section{background:var(--bg2);border-bottom:1px solid var(--border)}
+   .pq-header{margin-bottom:60px}
+   .pq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+   .pq-flip{height:320px;perspective:1000px;cursor:none}
+   .pq-flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s var(--ease)}
+   .pq-flip:hover .pq-flip-inner{transform:rotateY(180deg)}
+   .pq-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:4px;padding:36px 32px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+   .pq-front{background:var(--bg3);border:1px solid var(--border)}
+   .pq-front img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.35;transition:opacity .3s}
+   .pq-flip:hover .pq-front img{opacity:0.5}
+   .pq-front::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.9) 40%,rgba(8,8,8,0.2) 100%)}
+   .pq-front-content{position:relative;z-index:1}
+   .pq-num{font-family:var(--mono);font-size:44px;font-weight:700;color:transparent;-webkit-text-stroke:1px rgba(0,229,255,0.25);display:block;margin-bottom:12px;letter-spacing:-.04em}
+   .pq-title{font-size:18px;font-weight:700;text-transform:uppercase;color:var(--white);line-height:1.15}
+   .pq-back{background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(0,229,255,0.08));border:1px solid rgba(0,229,255,0.2);transform:rotateY(180deg);justify-content:center;gap:16px}
+   .pq-back-title{font-size:16px;font-weight:700;text-transform:uppercase;color:var(--white);margin-bottom:8px}
+   .pq-back-desc{font-size:13px;color:var(--muted);line-height:1.65}
+   .pq-back-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.2em;color:var(--cyan);text-transform:uppercase;margin-top:auto}
 
     /* ═══ METODOLOGÍA ═══ */
     .metodologia-section { background: rgba(15,15,15,0.82); border-bottom: 1px solid var(--border); }
@@ -1026,31 +1027,70 @@
     </div>
   </section>
 
-  <!-- ═══ PARA QUIÉN ES ═══ -->
-  <section class="section paraquien-section">
-    <div class="section-inner">
+<!-- ═══ PARA QUIÉN — Flip Cards ═══ -->
+<section class="page-section paraquien-section">
+  <div class="section-inner">
+    <div class="pq-header reveal">
       <span class="section-tag">— PARA QUIÉN ES</span>
-      <h2 class="section-title">¿ES PARA<br><em>VOS?</em></h2>
+      <h2 class="section-title">¿ES PARA <em>VOS?</em></h2>
+      <p style="font-size:15px;color:var(--muted);max-width:440px;margin-top:8px">Pasá el cursor sobre cada perfil para descubrir si te identificás.</p>
+    </div>
+    <div class="pq-grid">
 
-      <div class="paraquien-grid">
-        <div class="pq-card">
-          <span class="pq-num">01</span>
-          <div class="pq-title">El que nunca usó un sim</div>
-          <div class="pq-desc">No importa si jugaste videojuegos de autos o nunca tocaste un volante. El curso empieza desde cero y no asume ningún conocimiento previo.</div>
-        </div>
-        <div class="pq-card">
-          <span class="pq-num">02</span>
-          <div class="pq-title">El gamer que quiere dar el salto</div>
-          <div class="pq-desc">Tenés horas de juego pero sabés que no estás entrenando bien. Querés pasar de mover palancas a entender realmente lo que hacés con el auto.</div>
-        </div>
-        <div class="pq-card">
-          <span class="pq-num">03</span>
-          <div class="pq-title">El piloto real que quiere entrenar más</div>
-          <div class="pq-desc">Manejás en el mundo real pero querés sumar horas de volante de forma eficiente y económica. El sim te da la pista cuando vos querés.</div>
+      <div class="pq-flip">
+        <div class="pq-flip-inner">
+          <div class="pq-face pq-front">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Gamer">
+            <div class="pq-front-content">
+              <span class="pq-num">01</span>
+              <div class="pq-title">El que nunca usó un sim</div>
+            </div>
+          </div>
+          <div class="pq-face pq-back">
+            <div class="pq-back-title">Empezás desde cero</div>
+            <div class="pq-back-desc">No importa si jugaste videojuegos o nunca tocaste un volante. El curso arranca desde cero y no asume ningún conocimiento previo.</div>
+            <span class="pq-back-tag">→ NIVEL INICIAL IDEAL</span>
+          </div>
         </div>
       </div>
+
+      <div class="pq-flip">
+        <div class="pq-flip-inner">
+          <div class="pq-face pq-front">
+            <img src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=600&q=80" alt="Piloto gamer">
+            <div class="pq-front-content">
+              <span class="pq-num">02</span>
+              <div class="pq-title">El gamer que quiere dar el salto</div>
+            </div>
+          </div>
+          <div class="pq-face pq-back">
+            <div class="pq-back-title">Pasás de mover palancas a manejar</div>
+            <div class="pq-back-desc">Tenés horas de juego pero sabés que no estás entrenando bien. Querés entender realmente lo que hacés con el auto.</div>
+            <span class="pq-back-tag">→ RESET TÉCNICO TOTAL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pq-flip">
+        <div class="pq-flip-inner">
+          <div class="pq-face pq-front">
+            <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=600&q=80" alt="Piloto real">
+            <div class="pq-front-content">
+              <span class="pq-num">03</span>
+              <div class="pq-title">El piloto real que entrena más</div>
+            </div>
+          </div>
+          <div class="pq-face pq-back">
+            <div class="pq-back-title">El sim como herramienta real</div>
+            <div class="pq-back-desc">Manejás en el mundo real pero querés sumar horas de volante de forma eficiente y económica. El sim te da la pista cuando vos querés.</div>
+            <span class="pq-back-tag">→ +HORAS, MISMO NIVEL</span>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- ═══ METODOLOGÍA ═══ -->
   <section class="section metodologia-section">
