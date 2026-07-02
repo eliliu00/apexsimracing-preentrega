@@ -700,6 +700,7 @@
       .faq-layout { grid-template-columns: 1fr; }
       .otros-grid { grid-template-columns: 1fr 1fr; }
       .footer-top { grid-template-columns: repeat(3, 1fr); }
+      .video-layout { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
       :root { --nav-h: 60px; }
@@ -722,10 +723,61 @@
       .cta-final-btns { flex-direction: column; align-items: center; }
       .nav-inner { padding: 0 24px; gap: 16px; }
       .course-breadcrumb { font-size: 9px; }
+      .video-layout { padding: 0 24px; }
+      .tcard { width: 280px; }
+      .testimonios-header { flex-direction: column; align-items: flex-start; padding: 0 24px; }
+      .testimonios-header p { text-align: left; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
+
+    /* ═══ VIDEO SECTION ═══ */
+    .video-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 0; }
+    .video-layout { max-width: 1280px; margin: 0 auto; padding: 0 60px; display: grid; grid-template-columns: 1fr 520px; gap: 72px; align-items: center; }
+    .video-text .section-tag { color: var(--cyan); }
+    .video-text p { font-size: 16px; line-height: 1.75; color: var(--muted); max-width: 440px; margin-bottom: 32px; }
+    .video-highlights { display: flex; flex-direction: column; gap: 0; margin-top: 40px; }
+    .vh-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .vh-item:first-child { border-top: 1px solid var(--border); }
+    .vh-num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--cyan); flex-shrink: 0; width: 28px; }
+    .vh-text { font-size: 14px; color: var(--muted); line-height: 1.5; }
+    .vh-text strong { color: var(--white); font-weight: 600; }
+    .video-embed-wrap { position: relative; border-radius: 4px; overflow: hidden; border: 1px solid var(--border2); cursor: none; background: #000; }
+    .video-embed-wrap::before { content: ''; display: block; padding-top: 56.25%; }
+    .video-embed-wrap iframe, .video-embed-wrap img.video-thumb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: none; }
+    .video-play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; transition: opacity .3s; }
+    .video-play-btn:hover .play-circle { transform: scale(1.12); background: var(--cyan); border-color: var(--cyan); }
+    .video-play-btn:hover .play-circle svg { color: var(--bg); }
+    .play-circle { width: 72px; height: 72px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.5); backdrop-filter: blur(8px); background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; transition: transform .3s var(--ease), background .3s, border-color .3s; }
+    .play-circle svg { width: 26px; height: 26px; color: var(--white); margin-left: 3px; }
+    .video-embed-wrap.playing .video-play-btn { opacity: 0; pointer-events: none; }
+    .video-embed-wrap.playing iframe { z-index: 1; }
+
+    /* ═══ TESTIMONIOS CAROUSEL ═══ */
+    .testimonios-section { background: rgba(8,8,8,0.97); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px 0; position: relative; z-index: 1; }
+    .testimonios-header { max-width: 1280px; margin: 0 auto 52px; padding: 0 60px; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+    .testimonios-header h2 { font-size: clamp(28px,3.5vw,48px); font-weight: 700; line-height: .95; letter-spacing: -.03em; text-transform: uppercase; }
+    .testimonios-header h2 em { font-style: normal; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.3); }
+    .testimonios-header p { font-size: 14px; color: var(--muted2); max-width: 280px; line-height: 1.6; text-align: right; }
+    .tcarousel-wrap { display: flex; flex-direction: column; gap: 16px; }
+    .tcarousel-row { display: flex; overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%); }
+    .tcarousel-row:hover .tcarousel-track { animation-play-state: paused; }
+    .tcarousel-track { display: flex; gap: 16px; flex-shrink: 0; will-change: transform; }
+    .tcarousel-row.row-1 .tcarousel-track { animation: scrollLeft var(--duration,48s) linear infinite; }
+    .tcarousel-row.row-2 .tcarousel-track { animation: scrollLeft var(--duration,64s) linear infinite reverse; }
+    @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .tcard { flex-shrink: 0; width: 360px; background: var(--bg2); border: 1px solid var(--border); border-radius: 4px; padding: 28px 30px; position: relative; transition: border-color .3s, background .3s; }
+    .tcard:hover { border-color: var(--border2); background: var(--bg3); }
+    .tcard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--cyan); border-radius: 4px 4px 0 0; opacity: 0; transition: opacity .3s; }
+    .tcard:hover::before { opacity: 1; }
+    .tcard-stars { color: var(--yellow); font-size: 12px; letter-spacing: 2px; margin-bottom: 14px; }
+    .tcard-quote { font-size: 13px; line-height: 1.7; color: var(--muted); margin-bottom: 22px; font-style: italic; }
+    .tcard-author { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--border); padding-top: 18px; }
+    .tcard-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--purple), #0a0a1a); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--cyan); flex-shrink: 0; border: 1px solid rgba(0,229,255,0.18); }
+    .tcard-name { font-size: 12px; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.2; }
+    .tcard-meta { font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em; color: var(--muted2); text-transform: uppercase; margin-top: 2px; }
+    .tcard-badge { margin-left: auto; font-family: var(--mono); font-size: 8px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 3px 9px; border-radius: 2px; border: 1px solid; flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -817,6 +869,143 @@
           <span class="cstat-label">Certificación</span>
           <span class="cstat-val accent">APEX</span>
           <span class="cstat-sub">nivel inicial oficial</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ QUÉ INCLUYE + PRECIO ═══ -->
+  <section class="section incluye-section" id="reservar">
+    <div class="section-inner">
+      <div class="incluye-layout">
+        <div>
+          <span class="section-tag">— QUÉ INCLUYE</span>
+          <h2 class="section-title">TODO LO<br>QUE<br><em>NECESITÁS.</em></h2>
+
+          <ul class="incluye-list">
+            <li class="incluye-item">
+              <div class="incluye-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <div class="incluye-text-head">9 módulos en vivo</div>
+                <div class="incluye-text-sub">Clases con instructor en tiempo real. Sin grabaciones. Sin excusas. Cada módulo incluye práctica guiada en simulador.</div>
+              </div>
+            </li>
+            <li class="incluye-item">
+              <div class="incluye-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="3 9 21 9"/><polyline points="9 21 9 9"/></svg>
+              </div>
+              <div>
+                <div class="incluye-text-head">10 horas de pista guiada</div>
+                <div class="incluye-text-sub">Tiempo en simulador profesional con coaching activo. Hardware Simucube + Heusinkveld incluido en cada sesión.</div>
+              </div>
+            </li>
+            <li class="incluye-item">
+              <div class="incluye-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <div>
+                <div class="incluye-text-head">Análisis de telemetría básico</div>
+                <div class="incluye-text-sub">Acceso al software de telemetría durante los módulos 7–9. Revisión de datos con tu instructor para identificar mejoras concretas.</div>
+              </div>
+            </li>
+            <li class="incluye-item">
+              <div class="incluye-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <div class="incluye-text-head">Comunidad Apex Discord</div>
+                <div class="incluye-text-sub">Acceso permanente al servidor privado de pilotos, sesiones libres con la comunidad y ligas de práctica cada semana.</div>
+              </div>
+            </li>
+            <li class="incluye-item">
+              <div class="incluye-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <div class="incluye-text-head">Certificación Apex Nivel Inicial</div>
+                <div class="incluye-text-sub">Al completar el curso y el simulacro final, recibís la certificación oficial Apex que avala tu nivel y te habilita al Curso Avanzado.</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- PRECIO CARD -->
+        <div class="precio-card" id="precio-card">
+          <span class="precio-tag">PRECIO DEL CURSO</span>
+          <div class="precio-main">$89.000</div>
+          <div class="precio-sub">ARS · pago único</div>
+          <div class="precio-cuotas">✦ HASTA 3 CUOTAS SIN INTERÉS</div>
+
+          <div class="precio-divider"></div>
+
+          <ul class="precio-checklist">
+            <li class="precio-check"><span class="precio-check-dot"></span>9 módulos en vivo con instructor</li>
+            <li class="precio-check"><span class="precio-check-dot"></span>10 horas de pista guiada en sim profesional</li>
+            <li class="precio-check"><span class="precio-check-dot"></span>Análisis de telemetría incluido</li>
+            <li class="precio-check"><span class="precio-check-dot"></span>Acceso a comunidad Discord Apex</li>
+            <li class="precio-check"><span class="precio-check-dot"></span>Simulacro final de carrera</li>
+            <li class="precio-check"><span class="precio-check-dot"></span>Certificación Apex Nivel Inicial</li>
+          </ul>
+
+          <div class="precio-cta">
+            <a href="#" class="btn-primary magnetic">
+              <span>Reservar mi lugar</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#" class="btn-ghost magnetic">Consultar por WhatsApp</a>
+          </div>
+
+          <p class="precio-nota">Cupos limitados por camada.<br>El lugar se confirma con el pago.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ VIDEO SECTION ═══ -->
+  <section class="video-section">
+    <div class="video-layout">
+      <div class="video-text">
+        <span class="section-tag" style="color:var(--cyan)">— ASÍ ES EL ENTRENAMIENTO</span>
+        <h2 class="section-title" style="font-size:clamp(32px,4vw,56px)">MIRÁ LO QUE<br><em>TE ESPERA.</em></h2>
+        <p>Cada sesión es en vivo, con instructor, en hardware profesional. Esto no es un tutorial de YouTube. Es entrenamiento real con metodología de piloto.</p>
+        <div class="video-highlights">
+          <div class="vh-item">
+            <span class="vh-num">01</span>
+            <span class="vh-text"><strong>Briefing técnico</strong> antes de subir al simulador — objetivos claros por módulo</span>
+          </div>
+          <div class="vh-item">
+            <span class="vh-num">02</span>
+            <span class="vh-text"><strong>Coaching en tiempo real</strong> — el instructor te habla mientras manejás</span>
+          </div>
+          <div class="vh-item">
+            <span class="vh-num">03</span>
+            <span class="vh-text"><strong>Revisión de telemetría</strong> — cada dato analizado vuelta por vuelta</span>
+          </div>
+          <div class="vh-item">
+            <span class="vh-num">04</span>
+            <span class="vh-text"><strong>Debrief documentado</strong> — salís con un plan concreto para la próxima sesión</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIDEO EMBED con play overlay -->
+      <div class="video-embed-wrap" id="videoWrap" data-cursor="REPRODUCIR">
+        <img class="video-thumb" src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=900&q=85" alt="Simulador de racing profesional Apex">
+        <iframe
+          id="sectionVideo"
+          data-src="https://www.youtube.com/embed/XnrBSKpVw2A?autoplay=1&rel=0&modestbranding=1"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+          title="Sesión de entrenamiento Apex Sim Racing"
+          style="display:none"
+        ></iframe>
+        <div class="video-play-btn" id="videoPlayBtn">
+          <div class="play-circle">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
         </div>
       </div>
     </div>
@@ -933,95 +1122,6 @@
             <li class="modulo-tema">Estrategia de pit stop</li>
             <li class="modulo-tema">Debrief y evaluación Apex</li>
           </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ QUÉ INCLUYE + PRECIO ═══ -->
-  <section class="section incluye-section" id="reservar">
-    <div class="section-inner">
-      <div class="incluye-layout">
-        <div>
-          <span class="section-tag">— QUÉ INCLUYE</span>
-          <h2 class="section-title">TODO LO<br>QUE<br><em>NECESITÁS.</em></h2>
-
-          <ul class="incluye-list">
-            <li class="incluye-item">
-              <div class="incluye-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <div>
-                <div class="incluye-text-head">9 módulos en vivo</div>
-                <div class="incluye-text-sub">Clases con instructor en tiempo real. Sin grabaciones. Sin excusas. Cada módulo incluye práctica guiada en simulador.</div>
-              </div>
-            </li>
-            <li class="incluye-item">
-              <div class="incluye-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="3 9 21 9"/><polyline points="9 21 9 9"/></svg>
-              </div>
-              <div>
-                <div class="incluye-text-head">10 horas de pista guiada</div>
-                <div class="incluye-text-sub">Tiempo en simulador profesional con coaching activo. Hardware Simucube + Heusinkveld incluido en cada sesión.</div>
-              </div>
-            </li>
-            <li class="incluye-item">
-              <div class="incluye-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <div>
-                <div class="incluye-text-head">Análisis de telemetría básico</div>
-                <div class="incluye-text-sub">Acceso al software de telemetría durante los módulos 7–9. Revisión de datos con tu instructor para identificar mejoras concretas.</div>
-              </div>
-            </li>
-            <li class="incluye-item">
-              <div class="incluye-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-              <div>
-                <div class="incluye-text-head">Comunidad Apex Discord</div>
-                <div class="incluye-text-sub">Acceso permanente al servidor privado de pilotos, sesiones libres con la comunidad y ligas de práctica cada semana.</div>
-              </div>
-            </li>
-            <li class="incluye-item">
-              <div class="incluye-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div>
-                <div class="incluye-text-head">Certificación Apex Nivel Inicial</div>
-                <div class="incluye-text-sub">Al completar el curso y el simulacro final, recibís la certificación oficial Apex que avala tu nivel y te habilita al Curso Avanzado.</div>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <!-- PRECIO CARD -->
-        <div class="precio-card" id="precio-card">
-          <span class="precio-tag">PRECIO DEL CURSO</span>
-          <div class="precio-main">$89.000</div>
-          <div class="precio-sub">ARS · pago único</div>
-          <div class="precio-cuotas">✦ HASTA 3 CUOTAS SIN INTERÉS</div>
-
-          <div class="precio-divider"></div>
-
-          <ul class="precio-checklist">
-            <li class="precio-check"><span class="precio-check-dot"></span>9 módulos en vivo con instructor</li>
-            <li class="precio-check"><span class="precio-check-dot"></span>10 horas de pista guiada en sim profesional</li>
-            <li class="precio-check"><span class="precio-check-dot"></span>Análisis de telemetría incluido</li>
-            <li class="precio-check"><span class="precio-check-dot"></span>Acceso a comunidad Discord Apex</li>
-            <li class="precio-check"><span class="precio-check-dot"></span>Simulacro final de carrera</li>
-            <li class="precio-check"><span class="precio-check-dot"></span>Certificación Apex Nivel Inicial</li>
-          </ul>
-
-          <div class="precio-cta">
-            <a href="#" class="btn-primary magnetic">
-              <span>Reservar mi lugar</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="#" class="btn-ghost magnetic">Consultar por WhatsApp</a>
-          </div>
-
-          <p class="precio-nota">Cupos limitados por camada.<br>El lugar se confirma con el pago.</p>
         </div>
       </div>
     </div>
@@ -1167,6 +1267,42 @@
       </div>
     </div>
   </section>
+
+  <!-- ═══ TESTIMONIOS CAROUSEL ═══ -->
+  <section class="testimonios-section" id="testimonios">
+    <div class="testimonios-header">
+      <div>
+        <span class="section-tag">— LO QUE DICEN LOS PILOTOS</span>
+        <h2>LO QUE DICEN<br><em>LOS QUE PASARON.</em></h2>
+      </div>
+      <p>Más de 350 pilotos formados. Estas son sus palabras, no las nuestras.</p>
+    </div>
+
+    <div class="tcarousel-wrap">
+      <!-- FILA 1 — izquierda -->
+      <div class="tcarousel-row row-1" style="--duration:50s">
+        <div class="tcarousel-track" id="ttrack1">
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-quote">Empecé sin saber absolutamente nada. Al tercer módulo ya entendía por qué perdía tiempo en cada curva. La diferencia entre esto y un videojuego es abismal.</p><div class="tcard-author"><div class="tcard-avatar">MR</div><div><div class="tcard-name">Matías Rodríguez</div><div class="tcard-meta">Nivel Inicial · Marzo 2024</div></div><span class="tcard-badge" style="color:var(--cyan);border-color:rgba(0,229,255,0.3)">CERT.</span></div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-quote">Vine desde Rosario específicamente para hacer este curso. Vale cada peso y cada kilómetro. El nivel de detalle en el feedback es algo que no encontré en ningún otro lado.</p><div class="tcard-author"><div class="tcard-avatar">SL</div><div><div class="tcard-name">Santiago López</div><div class="tcard-meta">Nivel Inicial → Avanzado · 2024</div></div><span class="tcard-badge" style="color:var(--purple);border-color:rgba(124,58,237,0.35)">AVANZ.</span></div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-quote">El módulo de telemetría me abrió la cabeza. Ver mis datos comparados con el instructor fue un golpe de realidad necesario. Ya no puedo manejar sin mirar los datos.</p><div class="tcard-author"><div class="tcard-avatar">LC</div><div><div class="tcard-name">Luciana Campos</div><div class="tcard-meta">Nivel Inicial · Feb 2024</div></div><span class="tcard-badge" style="color:var(--cyan);border-color:rgba(0,229,255,0.3)">CERT.</span></div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-quote">Llevaba 2 años jugando GT7 y creía que era rápido. El primer módulo me demostró que hacía todo mal. Un reset total, y fue exactamente lo que necesitaba.</p><div class="tcard-author"><div class="tcard-avatar">JP</div><div><div class="tcard-name">Julián Pereyra</div><div class="tcard-meta">Nivel Inicial · Enero 2024</div></div><span class="tcard-badge" style="color:var(--cyan);border-color:rgba(0,229,255,0.3)">CERT.</span></div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-quote">El simulacro final fue una adrenalina increíble. Terminar el curso con una carrera real, con cronómetro y pit stops, le da un cierre que no esperaba. Completamente recomendado.</p><div class="tcard-author"><div class="tcard-avatar">FV</div><div><div class="tcard-name">Federico Villanueva</div><div class="tcard-meta">Nivel Inicial · Abril 2024</div></div><span class="tcard-badge" style="color:var(--green);border-color:rgba(105,240,174,0.3)">ROAD 27</span></div></div>
+        </div>
+      </div>
+      <!-- FILA 2 — inversa -->
+      <div class="tcarousel-row row-2" style="--duration:66s">
+        <div class="tcarousel-track" id="ttrack2">
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-quote">Nunca pensé que un simulador me iba a dar tanto. La curva de aprendizaje es súper bien guiada, nunca me sentí perdido. Y el hardware es de otro nivel.</p><div class="tcard-author"><div class="tcard-avatar">EM</div><div><div class="tcard-name">Ezequiel Molina</div><div class="tcard-meta">Nivel Inicial · Mayo 2024</div></div><span class="tcard-badge" style="color:var(--cyan);border-color:rgba(0,229,255,0.3)">CERT.</span></div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-quote">Mi instructor me dijo algo que me cambió: "la velocidad es consecuencia de la técnica, no al revés". Bajé 2 segundos por vuelta en 9 semanas.</p><div class="tcard-author"><div class="tcard-avatar">RB</div><div><div class="tcard-name">Ramiro Bravo</div><div class="tcard-meta">Nivel Inicial · Marzo 2024</div></div><span class="tcard-badge" style="color:var(--purple);border-color:rgba(124,58,237,0.35)">AVANZ.</span></div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-quote">La comunidad de Discord es un plus enorme. Seguís aprendiendo entre módulo y módulo, con otros pilotos del mismo nivel y sesiones libres todas las semanas.</p><div class="tcard-author"><div class="tcard-avatar">VN</div><div><div class="tcard-name">Valentina Núñez</div><div class="tcard-meta">Nivel Inicial · Feb 2024</div></div><span class="tcard-badge" style="color:var(--cyan);border-color:rgba(0,229,255,0.3)">CERT.</span></div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-quote">Hice el curso como regalo. Terminé tan enganchado que ya me anoté en el Avanzado. Lo que más me sorprendió fue lo seriamente que tratan el sim como herramienta real.</p><div class="tcard-author"><div class="tcard-avatar">NC</div><div><div class="tcard-name">Nicolás Castro</div><div class="tcard-meta">Nivel Inicial → Avanzado · 2024</div></div><span class="tcard-badge" style="color:var(--purple);border-color:rgba(124,58,237,0.35)">AVANZ.</span></div></div>
+          <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-quote">El debrief después de cada sesión es oro puro. Te explican exactamente qué hiciste bien, qué hiciste mal y cómo corregirlo. Nada genérico, todo muy específico.</p><div class="tcard-author"><div class="tcard-avatar">DH</div><div><div class="tcard-name">Diego Herrera</div><div class="tcard-meta">Nivel Inicial · Enero 2024</div></div><span class="tcard-badge" style="color:var(--cyan);border-color:rgba(0,229,255,0.3)">CERT.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
 
   <!-- ═══ CERTIFICACIÓN ═══ -->
   <section class="section cert-section">
@@ -1379,6 +1515,8 @@
     initFAQ();
     initTeleCanvas();
     initScrollReveal();
+    initVideoEmbed();
+    initCarousel();
   });
 
   /* GLOBAL PARTICLE GRID */
@@ -1644,6 +1782,34 @@
       el.style.transform = 'translateY(24px)';
       el.style.transitionDelay = `${(i % 3) * 80}ms`;
       obs.observe(el);
+    });
+  }
+
+  /* VIDEO EMBED */
+  function initVideoEmbed() {
+    const wrap = $('#videoWrap'), btn = $('#videoPlayBtn'), iframe = $('#sectionVideo');
+    if (!wrap || !btn || !iframe) return;
+    btn.addEventListener('click', () => {
+      iframe.src = iframe.dataset.src;
+      iframe.style.display = 'block';
+      wrap.classList.add('playing');
+    });
+  }
+
+  /* TESTIMONIOS CAROUSEL */
+  function initCarousel() {
+    ['ttrack1', 'ttrack2'].forEach(id => {
+      const t = document.getElementById(id);
+      if (!t) return;
+      [...t.children].forEach(c => {
+        const clone = c.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        t.appendChild(clone);
+      });
+    });
+    $$('.tcarousel-row').forEach(row => {
+      row.addEventListener('mouseenter', () => row.querySelectorAll('.tcarousel-track').forEach(t => t.style.animationPlayState = 'paused'));
+      row.addEventListener('mouseleave', () => row.querySelectorAll('.tcarousel-track').forEach(t => t.style.animationPlayState = 'running'));
     });
   }
   </script>
