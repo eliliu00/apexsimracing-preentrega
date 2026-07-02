@@ -790,3 +790,28 @@ $$('a[href^="#"]').forEach(a => {
     window.scrollTo({ top: target.offsetTop - navH - 16, behavior: 'smooth' });
   });
 });
+
+const hwBrands = document.querySelectorAll('.hw-brand');
+
+hwBrands.forEach(brand => {
+  const inner = brand.querySelector('.hw-brand-inner');
+  const img = inner ? inner.querySelector('img') : null;
+
+  if (inner && img) {
+    inner.addEventListener('mousemove', (e) => {
+      const rect = inner.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      
+      img.style.setProperty('--x', `${x}%`);
+      img.style.setProperty('--y', `${y}%`);
+    });
+
+    inner.addEventListener('mouseleave', () => {
+      img.style.setProperty('--x', '50%');
+      img.style.setProperty('--y', '50%');
+    });
+  }
+  
+});
+
