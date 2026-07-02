@@ -701,6 +701,7 @@
       .otros-grid { grid-template-columns: 1fr 1fr; }
       .footer-top { grid-template-columns: repeat(3, 1fr); }
       .video-layout { grid-template-columns: 1fr; }
+      .pq-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       :root { --nav-h: 60px; }
@@ -714,7 +715,7 @@
       .course-stats-row { flex-direction: column; }
       .cstat { border-right: none; border-bottom: 1px solid var(--border); }
       .cstat:last-child { border-bottom: none; }
-      .modulos-grid, .paraquien-grid, .otros-grid { grid-template-columns: 1fr; }
+      .modulos-grid, .pq-grid, .otros-grid { grid-template-columns: 1fr; }
       .modulos-header { grid-template-columns: 1fr; gap: 24px; }
       .faq-layout { grid-template-columns: 1fr; gap: 40px; }
       .footer-top { grid-template-columns: 1fr 1fr; padding: 0 24px 48px; }
@@ -727,6 +728,8 @@
       .tcard { width: 280px; }
       .testimonios-header { flex-direction: column; align-items: flex-start; padding: 0 24px; }
       .testimonios-header p { text-align: left; }
+      .pq-flip { height: 260px; }
+      .incluye-layout, .cert-inner, .metodo-layout, .video-layout { gap: 48px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
@@ -1196,13 +1199,44 @@
   <section class="section metodologia-section">
     <div class="section-inner">
       <div class="metodo-layout">
-        <div>
+        <!-- VISUAL: título + texto + panel de telemetría -->
+        <div class="metodo-visual">
           <span class="section-tag">— CÓMO ENTRENAMOS</span>
-          <h2 class="section-title" style="font-size: clamp(32px,4vw,56px);">MÉTODO<br>APEX</h2>
-          <p style="font-size:15px; color: var(--muted); line-height:1.7; margin-top: 20px; margin-bottom: 48px;">
+          <h2 class="section-title" style="font-size: clamp(28px,3.5vw,52px); margin-bottom: 20px;">MÉTODO<br>APEX</h2>
+          <p style="font-size:14px; color: var(--muted); line-height:1.7; margin-bottom: 32px;">
             No somos una academia de videojuegos. Aplicamos metodología de entrenamiento real: cada sesión tiene objetivos, cada dato tiene análisis y cada vuelta tiene feedback.
           </p>
 
+          <div class="tele-panel">
+            <div class="tele-header">
+              <span class="tele-title">TELEMETRÍA EN VIVO · SESIÓN 04</span>
+              <div class="tele-dot"></div>
+            </div>
+            <div class="tele-canvas-wrap">
+              <canvas id="metodeTele" width="480" height="120" style="width:100%;border-radius:2px;"></canvas>
+            </div>
+            <div class="tele-metrics">
+              <div class="tele-metric">
+                <span class="tele-metric-label">V. MÁX</span>
+                <span class="tele-metric-val">187</span>
+              </div>
+              <div class="tele-metric">
+                <span class="tele-metric-label">MEJOR SECTOR</span>
+                <span class="tele-metric-val">34.1</span>
+              </div>
+              <div class="tele-metric">
+                <span class="tele-metric-label">VUELTAS</span>
+                <span class="tele-metric-val">12</span>
+              </div>
+            </div>
+            <div class="tele-info">
+              <strong>Punto de mejora detectado:</strong> Entrada a la curva 3 — el frenado empieza 8 metros tarde, generando subviraje y perdiendo 0.3s por vuelta.
+            </div>
+          </div>
+        </div>
+
+        <!-- PASOS -->
+        <div>
           <div class="metodo-steps">
             <div class="metodo-step">
               <span class="metodo-step-num">01</span>
@@ -1231,36 +1265,6 @@
                 <div class="metodo-step-title">Debrief y plan</div>
                 <div class="metodo-step-desc">Cerramos cada módulo con un debrief documentado: qué mejoró, qué sigue y qué trabajar entre clases en las sesiones libres de la comunidad.</div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- PANEL TELEMETRÍA DECORATIVO -->
-        <div class="metodo-visual">
-          <div class="tele-panel">
-            <div class="tele-header">
-              <span class="tele-title">TELEMETRÍA EN VIVO · SESIÓN 04</span>
-              <div class="tele-dot"></div>
-            </div>
-            <div class="tele-canvas-wrap">
-              <canvas id="metodeTele" width="480" height="120" style="width:100%;border-radius:2px;"></canvas>
-            </div>
-            <div class="tele-metrics">
-              <div class="tele-metric">
-                <span class="tele-metric-label">V. MÁX</span>
-                <span class="tele-metric-val">187</span>
-              </div>
-              <div class="tele-metric">
-                <span class="tele-metric-label">MEJOR SECTOR</span>
-                <span class="tele-metric-val">34.1</span>
-              </div>
-              <div class="tele-metric">
-                <span class="tele-metric-label">VUELTAS</span>
-                <span class="tele-metric-val">12</span>
-              </div>
-            </div>
-            <div class="tele-info">
-              <strong>Punto de mejora detectado:</strong> Entrada a la curva 3 — el frenado empieza 8 metros tarde, generando subviraje y perdiendo 0.3s por vuelta.
             </div>
           </div>
         </div>
